@@ -8,6 +8,7 @@
 ## Features
 - Accounts
 - Customers
+- Notifications
 - UI
 
 ## Tech
