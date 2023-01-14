@@ -11,9 +11,11 @@
 
 Alaska uses these technologies: </br>
 -- NodeJS </br>
+-- RabbitMQ </br>
+-- Redis </br>
 -- PostgreSQL </br>
 -- MongoDB </br>
--- ReactJS
+-- ReactJS 
 
 
 
