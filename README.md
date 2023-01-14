@@ -6,13 +6,14 @@
 ## Features
 - Accounts
 - Customers
-
+- UI
 ## Tech
 
-Alaska uses these technologies:
+Alaska uses these technologies: </br>
 -- NodeJS
 -- PostgreSQL
 -- MongoDB
+-- ReactJS
 
 
 
