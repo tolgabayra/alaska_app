@@ -28,3 +28,10 @@ const list = () => {
     const text = ` SELECT * FROM tb_accounts`
     return pool.query(text)
 }
+
+module.exports = {
+    create,
+    destroy,
+    show,
+    list
+}
