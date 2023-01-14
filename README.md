@@ -1,12 +1,15 @@
 # Alaska App
 ## _Banking Application With Microservices_
 
+## Diagram
+<img src="./diagram.png"></img>
 
 
 ## Features
 - Accounts
 - Customers
 - UI
+
 ## Tech
 
 Alaska uses these technologies: </br>
