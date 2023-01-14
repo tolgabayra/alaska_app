@@ -10,9 +10,9 @@
 ## Tech
 
 Alaska uses these technologies: </br>
--- NodeJS
--- PostgreSQL
--- MongoDB
+-- NodeJS </br>
+-- PostgreSQL </br>
+-- MongoDB </br>
 -- ReactJS
 
 
