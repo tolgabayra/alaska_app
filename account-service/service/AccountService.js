@@ -24,8 +24,6 @@ const deposit = (id, amount) => {
 
 
 
-
-
 const create = (data) => {
     const text = `
     INSERT INTO
