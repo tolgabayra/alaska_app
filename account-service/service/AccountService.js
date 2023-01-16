@@ -7,7 +7,7 @@ const withdraw = (id, amount) => {
     const text = `
     UPDATE tb_accounts SET balance = balance - $1 WHERE id = $2
   `
-    return pool.query(text, [amount])
+    return pool.query(text, [amount, id])
 }
 
 

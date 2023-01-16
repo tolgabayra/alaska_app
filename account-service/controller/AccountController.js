@@ -1,20 +1,21 @@
 const { create, destroy, deposit, withdraw, show, list } = require("../service/AccountService")
 const { pool } = require("../config/DbConnect")
-const amqplib = require("amqplib")
-const queue = "amount_process"
-
+const { sendData } = require("../config/RabbitmqConnect")
 
 
 const withdrawMoney = async (req, res) => {
     const amount = req.body.amount
+    const id = req.params.id
     try {
         await pool.query("BEGIN")
-        await withdraw(req.params.id, amount)
-        res.status(200).json(`Amount Of Money Withdrawn :${amount}`)
+        await withdraw(id, amount)
+        sendData(amount)
+        res.status(200).json(`Amount Of Money Withdrawn: ${amount}$`)
         await pool.query("COMMIT")
     } catch (err) {
         await pool.query("ROLLBACK")
         res.status(500).json(err)
+        console.log(err);
     }
 }
 
@@ -24,6 +25,7 @@ const depositMoney = async () => {
         await pool.query("BEGIN")
         await deposit(req.params.id, amount)
         res.status(200).json(`Amount Of Money Deposit :${amount}`)
+        channel.sendToQueue("account-queue", Buffer.from(JSON.stringify(amount)))
         await pool.query("COMMIT")
     } catch (err) {
         await pool.query("ROLLBACK")
