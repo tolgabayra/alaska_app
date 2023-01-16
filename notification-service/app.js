@@ -12,6 +12,12 @@ async function connectQueue() {
     channel = await connection.createChannel()
     await channel.assertQueue("account-queue")
     console.log("CONNECTED RABBITMQ");
+
+
+    channel.consume("account-queue",  (amount) =>{
+      console.log("Data received : ", `${Buffer.from(amount.content)}` );
+    })
+    
   } catch (err) {
     console.log(err);
   }

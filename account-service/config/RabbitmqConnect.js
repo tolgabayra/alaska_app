@@ -18,10 +18,10 @@ const connectQueue = async () => {
 
 
 const sendData = async (data) => {
-    // send data to queue
+    //Send data to queue
     await channel.sendToQueue("account-queue", Buffer.from(JSON.stringify(data)));
 
-    // close the channel and connection
+    //Close the channel and connection
     await channel.close();
     await connection.close();
 }
