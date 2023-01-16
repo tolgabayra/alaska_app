@@ -43,11 +43,6 @@ export default function Login() {
                 </div>
               </div>
 
-              <div className="flex justify-between p-8 text-sm border-t border-gray-300 bg-gray-100">
-                <a href="#" className="font-medium text-indigo-500">Create account</a>
-
-                <a href="#" className="text-gray-600">Forgot password?</a>
-              </div>
             </div>
           </div>
         </div>

@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Text, Progress, Card } from '@mantine/core';
 import { NativeSelect, TextInput } from '@mantine/core';
+import { mainAxios } from '../utils/appAxios';
+
 const data = [
     { value: 'eur', label: '🇪🇺 EUR' },
     { value: 'usd', label: '🇺🇸 USD' },
@@ -8,6 +10,27 @@ const data = [
 ];
 
 export default function Board() {
+    const [accounts, setAccounts] = useState([])
+
+
+    useEffect(() => {
+        getAccountList()
+    }, [])
+
+
+
+    const getAccountList = () => {
+        mainAxios.get("/api/v1/accounts")
+            .then((res) => {
+                console.log(res)
+                setAccounts(res.data)
+
+            })
+            .catch(err => console.log(err))
+    }
+
+
+
     const select = (
         <NativeSelect
             data={data}
