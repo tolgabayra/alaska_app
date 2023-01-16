@@ -10,11 +10,18 @@ const data = [
 
 ];
 
+type Account = {
+    type: string,
+    description: string,
+    balance: number
+
+}
+
 export default function Board() {
     const [opened, setOpened] = useState(false);
 
 
-    const [accounts, setAccounts] = useState([])
+    const [accounts, setAccounts] = useState<Account>()
 
 
     useEffect(() => {
@@ -26,8 +33,8 @@ export default function Board() {
     const getAccountList = () => {
         mainAxios.get("/api/v1/accounts")
             .then((res) => {
-                console.log(res)
-                setAccounts(res.data)
+                console.log(res.data.rows[0])
+                setAccounts(res.data.rows[0])
 
             })
             .catch(err => console.log(err))
@@ -124,12 +131,14 @@ export default function Board() {
                                 backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
                             })}
                         >
-                            < Text className='mb-2 text-center'>Account Name</Text>
+                            < Text className='mb-2 text-center'> <span className='text-blue-500'> Account Type: </span> {accounts?.type} </Text>
+                            < Text className='mb-2 text-center'> <span className='text-blue-500'>Account Description:</span> {accounts?.description} </Text>
+
                             <Text className='flex justify-end' size="xs" transform="uppercase" weight={700} color="dimmed">
                                 Balance
                             </Text>
                             <Text className='flex justify-end' size="lg" weight={500}>
-                                $10.000
+                                $ {accounts?.balance}
                             </Text>
 
                             <TextInput
