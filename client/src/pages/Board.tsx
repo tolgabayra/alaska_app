@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Text, Progress, Card } from '@mantine/core';
 import { NativeSelect, TextInput } from '@mantine/core';
+import { Modal, Button, Group, Input, NumberInput } from '@mantine/core';
 import { mainAxios } from '../utils/appAxios';
 
 const data = [
@@ -10,6 +11,9 @@ const data = [
 ];
 
 export default function Board() {
+    const [opened, setOpened] = useState(false);
+
+
     const [accounts, setAccounts] = useState([])
 
 
@@ -45,6 +49,35 @@ export default function Board() {
     );
     return (
         <div>
+
+            {/*
+  <Modal
+                opened={opened}
+                onClose={() => setOpened(false)}
+                title="Enter the amount you want to withdraw"
+            >
+                <div>
+                    <Input className='mt-3' placeholder='Recipient ID'></Input>
+                    <NumberInput
+                        label="Price"
+                        defaultValue={1000}
+                        parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
+                        formatter={(value) =>
+                            !Number.isNaN(parseFloat(value))
+                                ? `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                                : '$ '
+                        }
+                    />
+                    <Button uppercase className='bg-blue-500 mt-14'>
+                        submit
+                    </Button>
+
+                </div>
+            </Modal>
+*/}
+
+
+
             <div className="bg-gray-100 min-h-screen">
                 <header className="px-6 bg-white flex flex-wrap items-center lg:py-0 py-2">
                     <div className="flex-1 flex justify-between items-center font-black text-gray-700">
@@ -100,21 +133,24 @@ export default function Board() {
                             </Text>
 
                             <TextInput
-                                label="Account ID"
+                                label="Account ID To Be Send"
                                 placeholder="51515-4548514-54545"
                             />
 
-                            <TextInput
-                                className='mt-2'
-                                type="number"
-                                placeholder="1000"
-                                label="Write what you want to withdraw money                                "
-                                rightSection={select}
-                                rightSectionWidth={96}
+                            <NumberInput
+                                className='mt-3'
+                                label="Price"
+                                defaultValue={1000}
+                                parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
+                                formatter={(value) =>
+                                    !Number.isNaN(parseFloat(value))
+                                        ? `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                                        : '$ '
+                                }
                             />
 
-                            <button className='bg-red-500 text-white p-2 pr-5 pl-5 mt-2 rounded-sm'>
-                                Withdraw
+                            <button onClick={() => setOpened(true)} className='bg-red-500 text-white p-2 pr-5 pl-5 mt-2 rounded-sm'>
+                                Send Money
                             </button>
                         </Card>
 
