@@ -1,6 +1,29 @@
 const { pool } = require("../config/DbConnect")
 
 
+// Check transaction 
+
+const withdraw = (id, amount) => {
+    const text = `
+    UPDATE tb_accounts SET balance = balance - $1 WHERE id = $2
+  `
+    return pool.query(text, [amount])
+}
+
+
+
+//Check transaction
+
+const deposit = (id, amount) => {
+    const text = `
+    UPDATE tb_accounts SET balance = balance + $1 WHERE id = $2
+  `
+    return pool.query(text, [amount])
+}
+
+
+
+
 
 
 const create = (data) => {
@@ -33,5 +56,7 @@ module.exports = {
     create,
     destroy,
     show,
-    list
+    list,
+    withdraw,
+    deposit
 }
