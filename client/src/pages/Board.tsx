@@ -186,6 +186,9 @@ export default function Board() {
 
                 </div>
             </div>
+            <footer>
+                <p>This is a footer</p>
+            </footer>
         </div>
     )
 }
