@@ -9,6 +9,8 @@ const connectQueue = async () => {
         channel = await connection.createChannel()
 
         await channel.assertQueue("account-queue")
+        await channel.assertQueue("account-id")
+
         console.log("CONNECTED RABBITMQ");
 
     } catch (error) {
@@ -26,9 +28,17 @@ const sendData = async (data) => {
     await connection.close();
 }
 
+const sendId = async (id) => {
+    await channel.sendToQueue("account-id", Buffer.from(JSON.stringify(id)))
+
+    await channel.close()
+    await connection.close()
+}
+
 
 
 module.exports = {
     connectQueue,
-    sendData
+    sendData,
+    sendId
 }

@@ -15,9 +15,12 @@ async function connectQueue() {
 
 
     channel.consume("account-queue",  (amount) =>{
-      console.log("Data received : ", `${Buffer.from(amount.content)}` );
+      console.log("Data received : ", `${Buffer.from(amount.content)} $` );
     })
     
+    channel.consume("account-id", (id) =>{
+      console.log("Id of the sender: ", `${Buffer.from(id.content)}`);
+    })
   } catch (err) {
     console.log(err);
   }

@@ -22,14 +22,15 @@ export default function Board() {
 
 
     const [accounts, setAccounts] = useState<Account>()
-
+    const [amount, setAmount] = useState()
+    const [id, setId] = useState()
 
     useEffect(() => {
         getAccountList()
     }, [])
 
 
-
+    //GetAccountList Axios
     const getAccountList = () => {
         mainAxios.get("/api/v1/accounts")
             .then((res) => {
@@ -39,6 +40,21 @@ export default function Board() {
             })
             .catch(err => console.log(err))
     }
+
+
+
+    const sendMoney = () => {
+        mainAxios.put(`/api/v1/accounts/withdraw/${id}`, {
+            amount: amount
+        })
+            .then((res) => {
+                console.log(res);
+
+            })
+            .catch(err => console.log(err))
+    }
+
+
 
 
 
@@ -142,11 +158,13 @@ export default function Board() {
                             </Text>
 
                             <TextInput
+                                onChange={(e)=>setId(e.target.value)}
                                 label="Account ID To Be Send"
                                 placeholder="51515-4548514-54545"
                             />
 
                             <NumberInput
+                                onChange={(e) => setAmount(e.target.value)}
                                 className='mt-3'
                                 label="Price"
                                 defaultValue={1000}
@@ -158,7 +176,7 @@ export default function Board() {
                                 }
                             />
 
-                            <button onClick={() => setOpened(true)} className='bg-red-500 text-white p-2 pr-5 pl-5 mt-2 rounded-sm'>
+                            <button onClick={sendMoney} className='bg-red-500 text-white p-2 pr-5 pl-5 mt-2 rounded-sm'>
                                 Send Money
                             </button>
                         </Card>

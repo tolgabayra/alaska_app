@@ -1,6 +1,6 @@
 const { create, destroy, deposit, withdraw, show, list } = require("../service/AccountService")
 const { pool } = require("../config/DbConnect")
-const { sendData } = require("../config/RabbitmqConnect")
+const { sendData, sendId } = require("../config/RabbitmqConnect")
 
 
 const withdrawMoney = async (req, res) => {
@@ -10,6 +10,7 @@ const withdrawMoney = async (req, res) => {
         await pool.query("BEGIN")
         await withdraw(id, amount)
         sendData(amount)
+        sendId(id)
         res.status(200).json(`Amount Of Money Withdrawn: ${amount}$`)
         await pool.query("COMMIT")
     } catch (err) {
